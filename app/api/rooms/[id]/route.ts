@@ -9,8 +9,6 @@ export async function GET(
   try {
     await DbConnect();
     const id = params.id;
-
-    console.log(id, "iiddddd");
     const room = await Room.findOne({ _id: id });
 
     if (!room) {

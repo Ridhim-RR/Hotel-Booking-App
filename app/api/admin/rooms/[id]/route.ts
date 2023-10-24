@@ -14,12 +14,18 @@ export async function DELETE(
     const room = await Room.findOne({ _id: id });
 
     if (!room) {
-      return NextResponse.json({ msg: "Room doesn't exist!!" });
+      return NextResponse.json(
+        { msg: "Room doesn't exist!!" },
+        { status: 404 }
+      );
     }
     const deletedRoom = await Room.findByIdAndDelete({ _id: id });
-    return NextResponse.json({ msg: "Room deleted successfully", deletedRoom });
-  } catch (err) {
-    return NextResponse.json({ msg: "Something went wrong!!" });
+    return NextResponse.json(
+      { msg: "Room deleted successfully", deletedRoom },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    return NextResponse.json({ msg: "Internal Server Error" }, { status: 500 });
   }
 }
 
@@ -31,7 +37,7 @@ export async function PATCH(
     await DbConnect();
     const id = params.id;
     const body = await request.json();
-    console.log(body, "BODY");
+    console.log(request, "BODY");
 
     const room = await Room.findOne({ _id: id });
     console.log(room, "ROOM");
@@ -40,7 +46,7 @@ export async function PATCH(
     }
     const updateRoom = await Room.findOneAndUpdate({ _id: id }, { $set: body });
     return NextResponse.json({ msg: "Success", updateRoom });
-  } catch (err) {
-    return NextResponse.json({ msg: "Something went wrong!!" });
+  } catch (error : any) {
+    return NextResponse.json({ msg: "Internal Server Error"}, { status: 500 });
   }
 }
