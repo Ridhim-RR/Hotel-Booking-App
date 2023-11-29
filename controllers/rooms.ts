@@ -1,4 +1,5 @@
 import Room from "@/models/room";
+import { NextResponse } from "next/server";
 
 export const getAllRooms =  async (request :Request) => {
     try{
@@ -10,3 +11,14 @@ export const getAllRooms =  async (request :Request) => {
     }
 
 }
+
+export const newRoom = async (request: Request) => {
+    try {
+        const body = request.json();
+        const room = await Room.create(body);
+        return NextResponse.json({success: true, room})
+    } catch (error) {
+        return NextResponse.json({error})
+    }
+}
+
