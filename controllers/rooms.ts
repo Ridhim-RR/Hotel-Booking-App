@@ -12,6 +12,7 @@ export const getAllRooms =  async (request :Request) => {
 
 }
 
+
 export const newRoom = async (request: Request) => {
     try {
         const body = request.json();
