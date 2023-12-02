@@ -2,6 +2,7 @@ import DbConnect from "@/config/dbConnect";
 import Room from "@/models/room";
 import { getAllRooms } from "@/controllers/rooms";
 import { NextRequest, NextResponse } from "next/server";
+import ErrorHandler from "@/utils/errorHandler";
 
 export async function POST(request: Request) {
   try {
@@ -29,6 +30,7 @@ export async function GET(request: NextRequest) {
         $options: "i",
       };
     }
+    // throw new ErrorHandler("Hellooooooooooooo",400)
     searchParams.forEach((value: string, key: string) => {
       if (key !== "search" && key != "page") {
         queryObject[key] = value;
@@ -42,8 +44,9 @@ export async function GET(request: NextRequest) {
     }
     let rooms = await Room.find(queryObject).skip(ofset).limit(reqPerPage);
     const totalRooms = await Room.countDocuments(queryObject);
-    return NextResponse.json(
-      rooms);
+    return NextResponse.json({
+      rooms,totalRooms
+    });
   } catch (err) {
     return NextResponse.json({ msg: "something terribly eeeeewent wrong!!" });
   }
