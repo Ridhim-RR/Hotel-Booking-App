@@ -18,14 +18,18 @@ const HomeComp = ({ data }: Props) => {
             <i className="fa fa-arrow-left"></i> Back to Search
           </Link>
           <div className="row mt-4">
-          {rooms?.length > 0
-            ? rooms.map((item:any) => {
-                return (
+            {rooms?.length > 0
+              ? rooms.map((item: any) => {
+                  return (
                     <div className="col-sm-12 col-md-6 col-lg-3 my-3 d-flex">
                       <div className="card p-2 w-100">
                         <img
                           className="card-img-top mx-auto"
-                          src={item.images.length > 0 ? item.images[0].url :"images/default_room_image.jpg"}
+                          src={
+                            item.images.length > 0
+                              ? item.images[0].url
+                              : "images/default_room_image.jpg"
+                          }
                           alt={item.name}
                           height="170"
                           width="100"
@@ -42,12 +46,12 @@ const HomeComp = ({ data }: Props) => {
                           <div>
                             <div>
                               <span className="no-of-reviews">
-                                (50 Reviews)
+                                {item.numOfReviews} Reviews
                               </span>
                             </div>
                             <Link
                               className="btn view-btn mt-3 w-100"
-                              href="/rooms/roomId"
+                              href={`${process.env.API_URL}/rooms/${item._id}`}
                             >
                               View Details
                             </Link>
@@ -55,10 +59,10 @@ const HomeComp = ({ data }: Props) => {
                         </div>
                       </div>
                     </div>
-                );
-              })
+                  );
+                })
               : null}
-              </div>
+          </div>
         </section>
       </div>
     </div>

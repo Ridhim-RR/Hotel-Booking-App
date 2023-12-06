@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const getAllRooms =  async (request :Request) => {
     try{
-     const reqPerPage: number = 8
+     const reqPerPage: number = 9
      const rooms = await Room.find().limit(reqPerPage);
     return Response.json({msg : "All rooms are fetched", rooms})
     }catch(err){
