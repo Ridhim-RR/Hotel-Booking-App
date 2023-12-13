@@ -92,6 +92,70 @@ body {
   }
 }
 
+ 
+/* card css' */
+
+.carddiv .carousel-item img{
+  position: relative;
+}
+.carddiv .carousel-item svg{
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  display: block;
+  height: 24px;
+  width: 24px;
+  stroke: #FFFFFF;
+  fill: rgba(0, 0, 0, 0.5);
+  stroke-width: 1;
+  overflow: visible;
+  z-index: 10;
+
+}
+.carddiv .carousel-item .colorsvg{
+  fill: rgba(223,65,96);
+  
+}
+
+/* image details  */
+.image_detail{
+  display: grid;
+  grid-template-columns: 55% 45%;
+  grid-gap: 6px;
+  border-radius: 12px;
+  width: 100%;
+}
+.image_detail img{
+  width: 100%;
+  height: 100%;
+}
+.left_detailimg img{
+  border-radius: 15px 0px 0px  15px ;
+}
+.imgdiv{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 6px;
+  width: 100%;
+}
+.imgdiv img:nth-child(2) {
+  border-radius: 0px 15px 0px 0px ;
+  
+}
+.imgdiv img:nth-child(4) {
+  border-radius: 0px 0px 15px 0px ;
+  
+}
+.navbar-brand a {
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 600;
+  color: #f12756;
+}
+
+
+
+
 /* User Setting Loader */
 
 @keyframes rotate {

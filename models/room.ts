@@ -1,4 +1,46 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
+
+interface Location {
+  type: string;
+  coordinates: [number, number];
+  formattedAddress?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+}
+
+interface Image {
+  publicId: string;
+  url: string;
+}
+
+interface Review {
+  user: Types.ObjectId;
+  ratings: number;
+  comment: string;
+}
+export interface IRoom extends Document {
+  name?: string;
+  description?: string;
+  pricePerNight?: number;
+  address?: string;
+  location?: Location;
+  guestCapacity?: number;
+  numberOfBeds?: number;
+  internet?: boolean;
+  isBreakfast?: boolean;
+  isAirConditined?: boolean
+  isRoomCleaning?: boolean;
+  isPetsAllowed?: boolean;
+  ratings?: number;
+  numOfReviews?: number;
+  images?: Image[];
+  category?: "King" | "Single" | "Twins";
+  reviews?: Review[];
+  user?: Types.ObjectId;
+}
+
 
 
 const roomSchema: Schema = new mongoose.Schema(
@@ -96,13 +138,22 @@ const roomSchema: Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    isAirConditined:{
+      type: Boolean,
+      default: false
+    },
+    isPetsAllowed:{
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,
   }
 );
 
-const Room = mongoose.models.Room || mongoose.model("Room", roomSchema);
+const Room = mongoose.models.Room || mongoose.model<IRoom>('Room', roomSchema);
+
 export default Room;
 
 

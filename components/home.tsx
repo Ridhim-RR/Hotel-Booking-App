@@ -1,9 +1,18 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { IRoom } from "../models/room";
+import Carousel from "react-bootstrap/Carousel";
+import {
+  IoIosArrowDroprightCircle,
+  IoIosArrowDropleftCircle,
+} from "react-icons/io";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 
 interface Props {
   data: {
-    rooms: any;
+    rooms: IRoom[];
     totalRooms: Number;
   };
 }
@@ -20,47 +29,64 @@ const HomeComp = ({ data }: Props) => {
           <div className="row mt-4">
             {rooms?.length > 0
               ? rooms.map((item: any) => {
-                  return (
-                    <div className="col-sm-12 col-md-6 col-lg-3 my-3 d-flex">
-                      <div className="card p-2 w-100">
-                        <img
-                          className="card-img-top mx-auto"
-                          src={
-                            item.images.length > 0
-                              ? item.images[0].url
-                              : "images/default_room_image.jpg"
+                const imageArr = [...item.images];
+                console.log(imageArr.length, "ARRAY");
+                return (
+                  <div className="col-sm-12 col-md-6 col-lg-3 my-3 d-flex">
+                    <div className="card p-2 w-100  carddiv">
+                      {imageArr.length > 0 ? (
+                        <Carousel
+                          indicators={false}
+                          nextIcon={
+                            <IoIosArrowDroprightCircle size={30} />
                           }
-                          alt={item.name}
-                          height="170"
-                          width="100"
-                        />
-                        <div className="card-body d-flex flex-column">
-                          <h5 className="card-title">
-                            <Link href="/rooms/roomId">{item.name}</Link>
-                          </h5>
-                          <div className="mt-auto">
-                            <p className="card-text mt-2">
-                              <b>${item.pricePerNight}:</b> / night
-                            </p>
-                          </div>
+                          prevIcon={
+                            <IoIosArrowDropleftCircle size={30} />
+                          }
+                        >
+                          {imageArr.map((image: any) => (
+                            <Carousel.Item key={image._id} >
+                              <img
+                                className="card-img-top mx-auto"
+                                src={image.url}
+                                alt={item.name}
+                                height="170"
+                                width="100"
+                              />
+                              {/* <CiHeart /> */}
+                              <FaHeart className="colorsvg"/>
+                            </Carousel.Item>
+                          ))}
+                        </Carousel>
+                      ) : null}
+
+                      <div className="card-body d-flex flex-column">
+                        <h5 className="card-title">
+                          <Link href="/rooms/roomId">{item.name}</Link>
+                        </h5>
+                        <div className="mt-auto">
+                          <p className="card-text mt-2">
+                            <b>${item.pricePerNight}:</b> / night
+                          </p>
+                        </div>
+                        <div>
                           <div>
-                            <div>
-                              <span className="no-of-reviews">
-                                {item.numOfReviews} Reviews
-                              </span>
-                            </div>
-                            <Link
-                              className="btn view-btn mt-3 w-100"
-                              href={`${process.env.API_URL}/rooms/${item._id}`}
-                            >
-                              View Details
-                            </Link>
+                            <span className="no-of-reviews">
+                              {item.reviews.length} Reviews
+                            </span>
                           </div>
+                          <Link
+                            className="btn view-btn mt-3 w-100"
+                            href={`/rooms/${item._id}`}
+                          >
+                            View Details
+                          </Link>
                         </div>
                       </div>
                     </div>
-                  );
-                })
+                  </div>
+                );
+              })
               : null}
           </div>
         </section>
@@ -68,5 +94,11 @@ const HomeComp = ({ data }: Props) => {
     </div>
   );
 };
-
 export default HomeComp;
+
+// <img
+// className="card-img-top mx-auto"
+// src={item.images.length > 0 ? item.images[0].url :"images/default_room_image.jpg"}
+// alt={item.name}
+// height="170"
+// width="100"

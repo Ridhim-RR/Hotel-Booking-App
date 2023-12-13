@@ -9,11 +9,12 @@ const Header = () => {
           <div className="col-6 col-lg-3 p-0">
             <div className="navbar-brand">
               <Link href="/">
-                <img
+                {/* <img
                   style={{ cursor: "pointer" }}
                   src="/images/bookit_logo.png"
                   alt="BookIT"
-                />
+                /> */}
+                Booking
               </Link>
             </div>
           </div>
@@ -36,7 +37,7 @@ const Header = () => {
                     width="50"
                   />
                 </figure>
-                <span className="placeholder-glow ps-1"> John Doe</span>
+                <span className="placeholder-glow ps-1"> Ridhim</span>
               </button>
 
               <div
