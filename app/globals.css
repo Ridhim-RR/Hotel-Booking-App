@@ -10,6 +10,7 @@ body {
   flex-direction: column;
 }
 
+
 /* Scroll Bar */
 
 ::-webkit-scrollbar-track {
@@ -153,8 +154,15 @@ body {
   color: #f12756;
 }
 
-
-
+.pag {
+  padding: 20px 0px;
+}
+.pag nav{
+  box-shadow: none;
+}
+.pag nav ul{
+  justify-content: center;
+}
 
 /* User Setting Loader */
 

@@ -9,15 +9,17 @@ import {
 } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
+import CustomPagination from "./customPagination";
 
 interface Props {
   data: {
     rooms: IRoom[];
     totalRooms: Number;
+    totalPages: Number;
   };
 }
 const HomeComp = ({ data }: Props) => {
-  const { rooms, totalRooms } = data;
+  const { rooms, totalRooms,totalPages } = data;
   return (
     <div>
       <div>
@@ -89,16 +91,13 @@ const HomeComp = ({ data }: Props) => {
               })
               : null}
           </div>
+          <CustomPagination totalPages={totalPages} />
         </section>
       </div>
+      {/* <CustomPagination totalPages={totalPages} /> */}
+      
     </div>
   );
 };
 export default HomeComp;
 
-// <img
-// className="card-img-top mx-auto"
-// src={item.images.length > 0 ? item.images[0].url :"images/default_room_image.jpg"}
-// alt={item.name}
-// height="170"
-// width="100"

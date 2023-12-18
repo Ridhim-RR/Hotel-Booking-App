@@ -3,6 +3,8 @@ import React from "react";
 import ImageSlider from "./imageSlider";
 import RoomFeatures from "./roomFeatures";
 import BookingDatePicker from "./BookingDatePicker";
+import ListReview from "./review/Listreview";
+import NewReview from "./review/NewReview";
 
 const RoomDetails = ({ data }: any) => {
   console.log(data, "DATA");
@@ -42,6 +44,8 @@ const RoomDetails = ({ data }: any) => {
           <BookingDatePicker room={data} />
         </div>
       </div>
+      <NewReview />
+      <ListReview />
     </div>
   );
 };

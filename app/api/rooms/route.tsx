@@ -37,15 +37,16 @@ export async function GET(request: NextRequest) {
       }
     });
     const currentPage: number = parseInt(page, 10) || 1;
-    const reqPerPage: number = 9;
+    const reqPerPage: number = 4;
     let ofset: number = 0;
     if (currentPage > 1) {
       ofset = (currentPage - 1) * reqPerPage;
     }
     let rooms = await Room.find(queryObject).skip(ofset).limit(reqPerPage);
     const totalRooms = await Room.countDocuments(queryObject);
+    const totalPages = Math.ceil(totalRooms/reqPerPage)
     return NextResponse.json({
-      rooms,totalRooms
+      rooms,totalRooms,totalPages
     });
   } catch (err) {
     return NextResponse.json({ msg: "something terribly eeeeewent wrong!!" });

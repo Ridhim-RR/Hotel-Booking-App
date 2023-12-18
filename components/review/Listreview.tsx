@@ -1,6 +1,6 @@
 import React from "react";
 
-const Listreview = () => {
+const ListReview = () => {
   return (
     <div className="reviews w-75 mb-5">
       <h3>3 Reviews</h3>
@@ -11,8 +11,8 @@ const Listreview = () => {
         <div className="row">
           <div className="col-3 col-lg-1">
             <img
-              src="./images/avatar.jpg"
-              alt="John Doe"
+              src="/images/avatar.jpg"
+              alt="user"
               width="60"
               height="60"
               className="rounded-circle"
@@ -26,7 +26,7 @@ const Listreview = () => {
               <i className="fa fa-star"></i>
               <i className="fa fa-star-half"></i>
             </div>
-            <p className="review_user mt-1">by John Doe</p>
+            <p className="review_user mt-1">by Ridhim</p>
             {/* <!-- Placeholder for Review Comment --> */}
             <p className="review_comment">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -42,4 +42,4 @@ const Listreview = () => {
   );
 };
 
-export default Listreview;
+export default ListReview;

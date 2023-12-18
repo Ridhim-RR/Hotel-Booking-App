@@ -5,7 +5,7 @@ const NewReview = () => {
     <>
       <button
         type="button"
-        className="btn form-btn mt-4 mb-5"
+        className="btn form-btn mt-4 mb-5 btn btn-danger"
         data-bs-toggle="modal"
         data-bs-target="#ratingModal"
       >
@@ -44,7 +44,7 @@ const NewReview = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn my-3 form-btn w-100"
+                className="btn my-3 form-btn w-100 btn btn-danger"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
