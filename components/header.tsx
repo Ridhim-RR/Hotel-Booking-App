@@ -1,7 +1,16 @@
+'use client';
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import axios from "axios";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+
 
 const Header = () => {
+  const path = usePathname();
+  const dispatch = useAppDispatch();
+  const {user} = useAppSelector((state) => state.auth);
+  
   return (
     <div>
       <nav className="navbar sticky-top py-2">
@@ -58,11 +67,21 @@ const Header = () => {
                 </Link>
               </div>
             </div>
+            
+            {path.match("/") ? (
+              <Link
+                href="/signin"
+                className="btn btn-danger px-4 text-white login-header-btn float-right"
+              >
+                Login
+              </Link>
+            ) : null}
           </div>
         </div>
       </nav>
     </div>
   );
 };
+   
 
 export default Header;

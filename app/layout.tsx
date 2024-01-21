@@ -18,9 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <Head />
       <body className={inter.className}>
+        <GlobalProvider>
           <Header />
           {children}
-          <Footer />
+        </GlobalProvider>
 
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></Script>
         <Script src="https://kit.fontawesome.com/f0714b5e27.js"></Script>

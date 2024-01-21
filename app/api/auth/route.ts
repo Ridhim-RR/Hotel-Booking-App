@@ -8,6 +8,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     DbConnect();
     const body = await req.json();
     const { name, email, password, avatar } = body;
+    const emailExists = await User.findOne({email});
+    if(emailExists){
+      return NextResponse.json({msg:"Email already exists", status:403})
+    }
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = new User({
