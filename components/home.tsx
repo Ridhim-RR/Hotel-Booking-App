@@ -32,7 +32,7 @@ const HomeComp = ({ data }: Props) => {
             {rooms?.length > 0
               ? rooms.map((item: any) => {
                 const imageArr = [...item.images];
-                console.log(imageArr.length, "ARRAY");
+                // console.log(imageArr.length, "ARRAY");
                 return (
                   <div className="col-sm-12 col-md-6 col-lg-3 my-3 d-flex">
                     <div className="card p-2 w-100  carddiv">

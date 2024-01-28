@@ -41,15 +41,20 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    return NextResponse.json(
-      { msg: "Success login!!", accessToken, findUser },
-      {
-        headers: {
-          "Set-Cookie": `refreshToken=${refreshToken}; HttpOnly; Secure; SameSite=None; httpOnly:true; maxAge: 24*60*60*1000`,
-          
-        },
-      }
+    const response =  NextResponse.json(
+      { msg: "Success login!!", accessToken, findUser }
     );
+
+   if (refreshToken) {
+  response.cookies.set("refreshToken", refreshToken, {
+    httpOnly: true,
+    sameSite: "none", // Use single quotes for consistency
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+}
+ return response;
+
+
   } catch (error) {
     console.log(error);
     return NextResponse.json({ msg: "Something went wrong!", status: 500 });

@@ -1,14 +1,35 @@
 import { upload } from "@/components/utils/multer";
-import { NextApiRequest } from "next";
+import next, { NextApiRequest } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import formidable from 'formidable'
 
 
-
-export async function POST(req: NextRequest, request: NextApiRequest) {
+export async function POST(req: NextRequest, res:NextResponse, request:Request) {
   try {
-    const expressRequest = req as Request;
-    const multerMiddleware = upload.array('upload');
+    const data = await req.formData();
+
+
+    console.log(data.get('upload'),"data")
+
+
+     const file = data.get('upload');
+     //@ts-ignore
+       const middle =  await upload.single("upload")(req ,res,(err) => {
+        if (err) {
+          console.error(err);
+          NextResponse.json({ error: 'Internal server error' });
+        }
+        console.log(res,"RES")
+      })
+      
+       
+
+       console.log(middle,"middlelelele")
+
+     
+
+    // const expressRequest = req as Request;
+    // const multerMiddleware = upload.array('upload');
     // console.log(multerMiddleware,"multerrrrrr")
     // const file = await multerMiddleware
     //  const data = await req.formData();

@@ -4,12 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useSelector } from "react-redux";
 
 
 const Header = () => {
   const path = usePathname();
   const dispatch = useAppDispatch();
-  const {user} = useAppSelector((state) => state.auth);
+  const stateValue = useSelector((state: any) => state.auth);
+  const name = stateValue?.user?.name;
   
   return (
     <div>
@@ -18,11 +20,6 @@ const Header = () => {
           <div className="col-6 col-lg-3 p-0">
             <div className="navbar-brand">
               <Link href="/">
-                {/* <img
-                  style={{ cursor: "pointer" }}
-                  src="/images/bookit_logo.png"
-                  alt="BookIT"
-                /> */}
                 Booking
               </Link>
             </div>
@@ -46,7 +43,7 @@ const Header = () => {
                     width="50"
                   />
                 </figure>
-                <span className="placeholder-glow ps-1"> Ridhim</span>
+                <span className="placeholder-glow ps-1"> {name ? name: "Username"}</span>
               </button>
 
               <div

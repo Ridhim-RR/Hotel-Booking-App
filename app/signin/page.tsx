@@ -17,6 +17,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loading from "../loading";
+import { useDispatch } from "react-redux";
+import { setIsAuthenticated, setUser } from "@/redux/slices/userSlice";
 
 function Copyright(props: any) {
   return (
@@ -38,8 +40,8 @@ function Copyright(props: any) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
-
 const SignIn = () => {
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -56,11 +58,13 @@ const SignIn = () => {
     if (response?.status === 200) {
       setLoading(false);
       toast.success("Login success!!");
+      dispatch(setUser(response.data?.findUser));
+      dispatch(setIsAuthenticated(response.data?.accessToken));
     } else {
       setLoading(false);
       toast.error("Login failed");
     }
-    console.log(response, "RESPONSE");
+    console.log(response.data, "RESPONSE");
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
