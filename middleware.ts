@@ -3,17 +3,16 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isPublicPath = path === '/signin';
   const token = request.cookies.get('refreshToken')?.value || '';
-  if(isPublicPath && token){
-    return NextResponse.redirect(new URL('/',request.nextUrl));
-  }
-  if(!isPublicPath && !token){
+  console.log(token,"Tokennn");
+  if(!token){
     return NextResponse.redirect(new URL('/signin',request.nextUrl));
   }
+  return NextResponse.next();
+  }
 
-}
+
 
 export const config = {
-  matcher: ["/", "/search","sigin"], // Apply to all routes
+  matcher: ["/",], // Apply to all routes
 };

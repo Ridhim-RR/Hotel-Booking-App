@@ -41,18 +41,15 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const response =  NextResponse.json(
-      { msg: "Success login!!", accessToken, findUser }
+    return NextResponse.json(
+      { msg: "Success login!!", accessToken, findUser },
+      {
+        headers: {
+          "Set-Cookie": `refreshToken=${refreshToken}; HttpOnly; Secure; SameSite=Strict; maxAge: 24*60*60*1000`,
+          
+        },
+      }
     );
-
-   if (refreshToken) {
-  response.cookies.set("refreshToken", refreshToken, {
-    httpOnly: true,
-    sameSite: "none", // Use single quotes for consistency
-    maxAge: 24 * 60 * 60 * 1000,
-  });
-}
- return response;
 
 
   } catch (error) {

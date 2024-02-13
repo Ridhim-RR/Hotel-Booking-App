@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import Loading from "../loading";
 import { useDispatch } from "react-redux";
 import { setIsAuthenticated, setUser } from "@/redux/slices/userSlice";
+import { useRouter } from "next/navigation";
 
 function Copyright(props: any) {
   return (
@@ -42,6 +43,7 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 const SignIn = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -60,6 +62,8 @@ const SignIn = () => {
       toast.success("Login success!!");
       dispatch(setUser(response.data?.findUser));
       dispatch(setIsAuthenticated(response.data?.accessToken));
+      router.push("/");
+      
     } else {
       setLoading(false);
       toast.error("Login failed");
