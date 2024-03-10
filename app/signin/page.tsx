@@ -49,27 +49,39 @@ const SignIn = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-    console.log("object");
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API}auth/login`,
-      data
-    );
-    if (response?.status === 200) {
-      setLoading(false);
-      toast.success("Login success!!");
-      dispatch(setUser(response.data?.findUser));
-      dispatch(setIsAuthenticated(response.data?.accessToken));
-      router.push("/");
-      
-    } else {
+    try {
+      event.preventDefault();
+      setLoading(true);
+      console.log("object");
+      // const response = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_API}auth/login`,
+      //   data
+      // );
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        data
+      );
+      if (response?.status === 200) {
+        setLoading(false);
+        toast.success("Login success!!");
+        dispatch(setUser(response.data?.findUser));
+        dispatch(setIsAuthenticated(response.data?.accessToken));
+        setData({
+          email:"",
+          password:""
+        })
+        router.push("/");
+        // console.log(response.data, "RESPONSE");
+      }
+    } catch (error) {
       setLoading(false);
       toast.error("Login failed");
+      // console.log(error,"ERROR")
     }
-    console.log(response.data, "RESPONSE");
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = e.target.value;

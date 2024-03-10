@@ -22,7 +22,6 @@ export async function GET(request: NextRequest) {
     DbConnect();
     const searchParams = request.nextUrl.searchParams;
     const search: any = searchParams.get("search");
-    console.log(search,"aaaaaaaaaaaaaal")
     const page: any = searchParams.get("page");
     let queryObject: any = {};
     if (search) {
@@ -44,10 +43,8 @@ export async function GET(request: NextRequest) {
     if (currentPage > 1) {
       ofset = (currentPage - 1) * reqPerPage;
     }
-    console.log(queryObject,"llplplplp")
 
     let rooms = await Room.find(queryObject).skip(ofset).limit(reqPerPage);
-    console.log(rooms)
     const totalRooms = await Room.countDocuments(queryObject);
     const totalPages = Math.ceil(totalRooms/reqPerPage)
     return NextResponse.json({

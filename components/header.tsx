@@ -12,7 +12,11 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const stateValue = useSelector((state: any) => state.auth);
   const name = stateValue?.user?.name;
-  
+  console.log(stateValue,"cbhbhbchdbs")
+  const handleLogout = async() => {
+    let data = await axios.post(`http://localhost:3000/api/auth/logout`);
+    console.log(data.status,"DATATAATA")
+  }
   return (
     <div>
       <nav className="navbar sticky-top py-2">
@@ -59,13 +63,13 @@ const Header = () => {
                 <Link href="/me/update" className="dropdown-item">
                   Profile
                 </Link>
-                <Link href="/" className="dropdown-item text-danger">
+                <Link href="#" onClick={handleLogout} className="dropdown-item text-danger">
                   Logout
                 </Link>
               </div>
             </div>
             
-            {path.match("/") ? (
+            {path.match("/") && !stateValue ? (
               <Link
                 href="/signin"
                 className="btn btn-danger px-4 text-white login-header-btn float-right"

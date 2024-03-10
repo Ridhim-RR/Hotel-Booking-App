@@ -1,3 +1,4 @@
+'use client';
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Inter } from "next/font/google";
@@ -8,6 +9,8 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { useSelector } from "react-redux";
 import SignIn from "./signin/page";
+import axios from "axios";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +19,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const token = async () => {
+  //   const data = await axios.get("http://localhost:3000/api/auth/refresh");
+  //   console.log(data); 
+  // }
+  // useEffect(() => {
+  //   token()
+  // },[])
   return (
     <html lang="en">
       <Head />
